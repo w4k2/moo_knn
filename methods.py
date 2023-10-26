@@ -43,37 +43,3 @@ class ClassWeightedKNN(BaseEstimator, ClassifierMixin):
         preds = preds.reshape(X_test.shape[0])
 
         return preds
-
-class CowSplit(BaseEstimator, ClassifierMixin):
-
-    def __init__(self, k=5, weights=None, centroids=None):
-        self.k = k
-        self.weights = weights
-        self.centroids = centroids
-
-    def split(self, X):
-        # Assign all samples to regions
-        distances = cdist(self.centroids, X)
-        regions = np.argmin(distances, axis=0)
-
-        return regions
-
-    def fit(self, X, y):
-        regions = self.split(X)
-        self.knns = []
-        # Initialize and fit k-NNs for every regions
-        for i in range(len(self.centroids)):
-            knn = ClassWeightedKNN(n_neighbors=self.k)
-            knn.fit(X[regions==i], y[regions==i])
-            self.knns.append(knn)
-    
-    def predict(self, X):
-        regions = self.split(X)
-        preds = []
-        # Predict probas in their regions
-        for i in range(len(self.centroids)):
-            pred = self.knns[i].predict(X[regions==i])
-            preds.append(pred)
-
-        return preds, regions
-        
