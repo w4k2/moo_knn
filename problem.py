@@ -27,7 +27,7 @@ class KnnOptProblem(ElementwiseProblem):
         k, weight = x
         n_splits = 2
         n_repeats = 5
-        rskf = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats)
+        rskf = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=42)
         X = np.copy(self.X)
         y = np.copy(self.y)
 
