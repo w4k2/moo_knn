@@ -39,7 +39,7 @@ class ClassWeightedKNN(BaseEstimator, ClassifierMixin):
         sorted_distances = np.argsort(distances, axis=0)
         n_distances = sorted_distances[:int(self.k_neighbors)]
         y_s = self.y_[n_distances]
-        preds, counts = mode(y_s, axis=0, keepdims=True)
+        preds, counts = mode(y_s, axis=0)
         preds = preds.reshape(X_test.shape[0])
 
         return preds
