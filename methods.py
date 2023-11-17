@@ -34,7 +34,7 @@ class ClassWeightedKNN(BaseEstimator, ClassifierMixin):
         else:
             weight = 1/self.weight
             
-        distances[self.y_==1] = distances[self.y_==1] * weight
+        distances[self.y_==0] = distances[self.y_==0] * weight
 
         sorted_distances = np.argsort(distances, axis=0)
         n_distances = sorted_distances[:int(self.k_neighbors)]
