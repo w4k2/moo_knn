@@ -15,6 +15,7 @@ datasets_dir = "datasets"
 datasets = os.listdir(datasets_dir)
 
 for data_idx, dataset in enumerate(datasets):
+    dataset_name = dataset.split(".")[0]
     plt.figure()
     path = os.path.join(datasets_dir, dataset)
     
@@ -40,8 +41,15 @@ for data_idx, dataset in enumerate(datasets):
             scores[param_idx, 1] = recall_score(y[test], y_pred)
 
             
-        plt.scatter(scores[:,0], scores[:,1])
-        plt.xlabel("precision")
-        plt.ylabel("recall")
-        plt.savefig(f"figures/real/exp2_{dataset}.png")
+        fig, ax = plt.subplots(1, 1, figsize=(13, 10))
+        ax.scatter(scores[:,0], scores[:,1])
+        ax.set_xlabel("precision")
+        ax.set_ylabel("recall")
+        ax.grid(ls=":")
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        fig.suptitle(f"{dataset_name}")
+        plt.tight_layout()
+        plt.savefig(f"figures/real/exp2_{dataset_name}.png")
+        plt.close()
         

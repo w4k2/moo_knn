@@ -14,7 +14,7 @@ n_splits = 2
 n_repeats = 5
 datasets_dir = "datasets"
 
-datasets = os.listdir(datasets_dir)
+datasets = os.listdir(datasets_dir)[-3:]
 
 for data_idx, dataset in enumerate(datasets):
     path = os.path.join(datasets_dir, dataset)
