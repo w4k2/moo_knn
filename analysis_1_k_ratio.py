@@ -34,5 +34,6 @@ for data_idx in range(n_datasets):
 
 print(collected_k)
 
-print(collected_weight[:, 0] / collected_weight[:, 1])
+a = collected_weight[:, 0] / collected_weight[:, 1]
+print(1/a)
 print(collected_weight[:, 1])
